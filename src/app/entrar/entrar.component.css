@@ -1,0 +1,10 @@
+#img-bg{
+    background: rgb(227,131,208);
+    background: linear-gradient(0deg, rgba(227,131,208,1) 0%, rgba(145,160,225,1) 61%, rgba(0,212,255,1) 100%);  
+
+    min-height: 100vh;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
