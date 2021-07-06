@@ -21,7 +21,19 @@ export class TemaService {
     return this.http.get<Tema[]>('https://blogdohiga.herokuapp.com/temas', this.token)
   }
 
+  getByIdTema(id: number): Observable<Tema>{
+    return this.http.get<Tema>(`https://blogdohiga.herokuapp.com/temas/${id}`, this.token)
+  }
+
   postTema(tema: Tema): Observable<Tema>{
     return this.http.post<Tema>('https://blogdohiga.herokuapp.com/temas', tema, this.token)
+  }
+
+  putTema(tema: Tema): Observable<Tema>{
+    return this.http.put<Tema>('https://blogdohiga.herokuapp.com/temas/editar', tema, this.token)
+  }
+
+  deleteTema(id: number){
+    return this.http.delete(`https://blogdohiga.herokuapp.com/temas/${id}`, this.token)
   }
 }
