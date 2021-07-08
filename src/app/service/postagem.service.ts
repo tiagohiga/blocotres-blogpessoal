@@ -21,7 +21,19 @@ export class PostagemService {
     return this.http.get<Postagem[]>('https://blogdohiga.herokuapp.com/postagens', this.token)
   }
 
+  getByIdPostagem(id: number): Observable<Postagem>{
+    return this.http.get<Postagem>(`https://blogdohiga.herokuapp.com/postagens/${id}`, this.token)
+  }
+
   postPostagem(postagem: Postagem): Observable<Postagem>{
     return this.http.post<Postagem>('https://blogdohiga.herokuapp.com/postagens/postar', postagem, this.token)
+  }
+
+  putPostagem(postagem: Postagem): Observable<Postagem>{
+    return this.http.put<Postagem>('https://blogdohiga.herokuapp.com/postagens/postar/editar', postagem, this.token)
+  }
+
+  deletePostagem(id: number){
+    return this.http.delete(`https://blogdohiga.herokuapp.com/postagens/${id}`, this.token)
   }
 }
