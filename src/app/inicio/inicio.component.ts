@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.prod';
 import { Postagem } from '../model/Postagem';
 import { Tema } from '../model/Tema';
 import { Usuario } from '../model/Usuario';
+import { AlertasService } from '../service/alertas.service';
 import { AuthService } from '../service/auth.service';
 import { PostagemService } from '../service/postagem.service';
 import { TemaService } from '../service/tema.service';
@@ -15,6 +16,12 @@ import { UsuarioService } from '../service/usuario.service';
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
+
+  key = 'date'
+  reverse = true
+
+  tituloPost: string
+  nomeDoTema: string
 
   postagem: Postagem = new Postagem()
   tema: Tema = new Tema()
@@ -30,7 +37,8 @@ export class InicioComponent implements OnInit {
     private router: Router,
     private postagemService: PostagemService,
     private temaService: TemaService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private alertaService: AlertasService
   ) { }
 
   ngOnInit() {
@@ -77,10 +85,30 @@ export class InicioComponent implements OnInit {
 
     this.postagemService.postPostagem(this.postagem).subscribe((resp: Postagem) => {
       this.postagem = resp
-      alert("Postagem realizada com sucesso!")
+      this.alertaService.showAlertSuccess("Postagem realizada com sucesso!")
       this.postagem = new Postagem()
       this.getAllPostagens()
     })
+  }
+
+  findByTituloPostagem(){
+    if(this.tituloPost == ''){
+      this.getAllPostagens()
+    }else{
+      this.postagemService.getByTituloPostagem(this.tituloPost).subscribe((resp: Postagem[]) => {
+        this.listaPostagem = resp
+      })
+    }
+  }
+
+  findByNomeTema(){
+    if(this.nomeDoTema == ''){
+      this.getAllTemas
+    }else{
+      this.temaService.getByNomeTema(this.nomeDoTema).subscribe((resp: Tema[]) => {
+        this.listaTemas = resp
+      })
+    }
   }
 
 }

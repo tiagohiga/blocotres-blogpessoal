@@ -30,7 +30,7 @@ export class EntrarComponent implements OnInit {
       environment.nomeUsuario = this.userLogin.nomeUsuario
       environment.fotoUsuario = this.userLogin.fotoUsuario
       environment.idUsuario = this.userLogin.idUsuario
-      
+      environment.tipoUsuario = this.userLogin.tipoUsuario
       this.router.navigate(['/inicio'])
     }, erro => {
       if(erro.status == 401){

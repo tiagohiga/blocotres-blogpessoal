@@ -40,8 +40,16 @@
 
     <div class="tab-content my-5" id="nav-tabContent">
         <div class="tab-pane fade show active" id="todasPostagens" role="tabpanel" aria-labelledby="todasPostagens-tab">
+            <div class="row d-flex justify-content-center mb-5 mt-5">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" id="tituloPostagem" type="text" placeholder="Digite um titulo de postagem para pesquisar" [(ngModel)]='tituloPost' (keyup)='findByTituloPostagem()'>
+                    </div>
+                </div>
+            </div>
+
             <div class="card-columns">
-                <div class="card text-center" *ngFor='let item of listaPostagem'>
+                <div class="card text-center" *ngFor='let item of listaPostagem | orderBy: key : reverse'>
                     <div class="card-body">
                       <h5 class="card-title m-0">{{item.titulo}}</h5>
                       <small>Tema: {{item.temaPostagem.descricao}}</small>
@@ -54,7 +62,7 @@
         </div>
         <div class="tab-pane fade" id="minhasPostagens" role="tabpanel" aria-labelledby="minhasPostagens-tab">
             <div class="card-columns">
-                <div class="card text-center" *ngFor='let item of usuario.listaPostagens'>
+                <div class="card text-center" *ngFor='let item of usuario.listaPostagens | orderBy: key : reverse'>
                     <div class="card-body">
                       <h5 class="card-title m-0">{{item.titulo}}</h5>
                       <small>Tema: {{item.temaPostagem.descricao}}</small>
@@ -68,6 +76,14 @@
             </div>
         </div>
         <div class="tab-pane fade" id="postagemTema" role="tabpanel" aria-labelledby="postagemTema-tab">
+            <div class="row d-flex justify-content-center mb-5 mt-5">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" id="nomeTema" type="text" placeholder="Digite um tema para pesquisar" [(ngModel)]='nomeDoTema' (keyup)='findByNomeTema()'>
+                    </div>
+                </div>
+            </div>
+
             <div class="card-columns" *ngFor='let tema of listaTemas'>
                 <div class="card text-center" *ngFor='let item of tema.temaPostagens'>
                     <div class="card-body">

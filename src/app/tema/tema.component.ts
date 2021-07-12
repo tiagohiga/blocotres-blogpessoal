@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.prod';
 import { Tema } from '../model/Tema';
+import { AlertasService } from '../service/alertas.service';
 import { TemaService } from '../service/tema.service';
 
 @Component({
@@ -16,12 +17,18 @@ export class TemaComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private temaServices: TemaService
+    private temaServices: TemaService,
+    private alertas: AlertasService
   ) { }
 
   ngOnInit() {
     if(environment.tokenUsuario == ''){
       this.router.navigate(['/entrar'])
+    }
+
+    if(environment.tipoUsuario != 'Admin'){
+      this.alertas.showAlertInfo("Você precisa ser adm para acessar esta rota")
+      this.router.navigate(['/inicio'])
     }
 
     this.findAllTema()
